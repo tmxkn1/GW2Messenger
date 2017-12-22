@@ -19,15 +19,23 @@ namespace ArcDPSAutoUpdate
             Missing
         }
 
+        private const string ArcdpsUrl = @"https://www.deltaconnected.com/arcdps/x64/d3d9.dll";
+        private const string BuildTempUrl = @"https://www.deltaconnected.com/arcdps/x64/buildtemplates/d3d9_arcdps_buildtemplates.dll";
+        private const string ArcdpsMd5Url = @"https://www.deltaconnected.com/arcdps/x64/d3d9.dll.md5sum";
+
+        private const string ArcdpsFileName = "d3d9.dll";
+        private const string BuildTempFileName = "d3d9_arcdps_buildtemplates.dll";
+        private const string BackUpExt = ".bak";
+
         public static FileStatus IsLocalArcDpsUpToDate(string gw2Directory)
         {
             // check if local file exists
-            if (!File.Exists(gw2Directory + @"\d3d9.dll"))
+            if (!File.Exists(gw2Directory + "\\" + ArcdpsFileName))
                 return FileStatus.Missing;
 
             // get remote md5
             string remoteMd5;
-            var webRequest = WebRequest.Create(@"https://www.deltaconnected.com/arcdps/x64/d3d9.dll.md5sum");
+            var webRequest = WebRequest.Create(ArcdpsMd5Url);
             try
             {
                 using (var response = webRequest.GetResponse())
@@ -52,7 +60,7 @@ namespace ArcDPSAutoUpdate
             }
 
             // get local md5
-            var localMd5 = ComputeMd5(gw2Directory + @"\d3d9.dll");
+            var localMd5 = ComputeMd5(gw2Directory + "\\" + ArcdpsFileName);
 
             return localMd5 == remoteMd5 ? FileStatus.UpToDate : FileStatus.OutDated;
         }
@@ -60,18 +68,18 @@ namespace ArcDPSAutoUpdate
         public static FileStatus IsLocalBuildTempUpToDate(string gw2Directory)
         {
             // check if local file exists
-            if (!File.Exists(gw2Directory + @"\d3d9_arcdps_buildtemplates.dll"))
+            if (!File.Exists(gw2Directory + "\\" + BuildTempFileName))
                 return FileStatus.Missing;
 
             // get remote md5
-            var remoteFile = Path.GetTempPath() + @"\d3d9_arcdps_buildtemplates.dll";
+            var dFile = Path.GetTempPath() + "\\" + BuildTempFileName;
                 
-            if (!DownloadFile(@"https://www.deltaconnected.com/arcdps/x64/buildtemplates/d3d9_arcdps_buildtemplates.dll", remoteFile))
+            if (!DownloadFile(BuildTempUrl, dFile))
                 return FileStatus.None;
-            var remoteMd5 = ComputeMd5(remoteFile);
+            var remoteMd5 = ComputeMd5(dFile);
 
             // get local md5
-            var localMd5 = ComputeMd5(gw2Directory + @"\d3d9_arcdps_buildtemplates.dll");
+            var localMd5 = ComputeMd5(gw2Directory + "\\" + BuildTempFileName);
 
             return localMd5 == remoteMd5 ? FileStatus.UpToDate: FileStatus.OutDated;
         }
@@ -80,21 +88,17 @@ namespace ArcDPSAutoUpdate
         #region webdownloads
         public static Exception DownloadArcDps(string gw2Directory)
         {
-            return DownloadFileWithBackup(
-                @"https://www.deltaconnected.com/arcdps/x64/d3d9.dll",
-                gw2Directory + @"\d3d9.dll");
+            return DownloadFileWithBackup(ArcdpsUrl, gw2Directory + "\\" + ArcdpsFileName);
         }
         
         public static Exception DownloadBuildTemp(string gw2Directory)
         {
-            return DownloadFileWithBackup(
-                @"https://www.deltaconnected.com/arcdps/x64/buildtemplates/d3d9_arcdps_buildtemplates.dll",
-                gw2Directory + @"\d3d9_arcdps_buildtemplates.dll");
+            return DownloadFileWithBackup(BuildTempUrl, gw2Directory + "\\" + BuildTempFileName);
         }
 
         private static Exception DownloadFileWithBackup(string url, string filename)
         {
-            var backupFile = filename + ".bak";
+            var backupFile = filename + BackUpExt;
 
             // rename existing file
             if (File.Exists(filename))

@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Background.cs" />
     <Compile Include="Gw2Data.cs" />
     <Compile Include="WebReq.cs" />
     <Page Include="MainWindow.xaml">
