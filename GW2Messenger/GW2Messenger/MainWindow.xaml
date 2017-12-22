@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GW2Messenger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+        Title="MainWindow" Height="350" Width="183.879" Loaded="Window_Loaded" SizeToContent="WidthAndHeight">
     <Grid>
-        
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/></Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/></Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2" MinHeight="20"></Menu>
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Expander x:Name="GemStoreExpander" Header="Gem store">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Content="Track" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
+                    <StackPanel x:Name="GemStoreStackPanel" Grid.Row="1"/>
+                </Grid>
+            </Expander>
+            <Expander x:Name="EventTimerExpander" Header="Event timer">
+                
+            </Expander>
+        </StackPanel>
     </Grid>
 </Window>

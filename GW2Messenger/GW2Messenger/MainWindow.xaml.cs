@@ -25,10 +25,26 @@ namespace GW2Messenger
             InitializeComponent();
         }
 
+        private Gw2Data.Sale[] _gemSaleList;
+        private Gw2Data.Outfit[] _outfitList;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var outfitList = WebReq.UpdateOutfitList();
-            var gemSaleList = WebReq.UpdateGemSaleList();
+            
+            UpdateGemStoreList();
+        }
+
+        private void UpdateGemStoreList()
+        {
+            _gemSaleList = WebReq.UpdateGemSaleList();
+            foreach (var item in _gemSaleList)
+            {
+                var text = new TextBlock();
+                text.Text = $"{item.Name} - {item.GemCost}";
+
+                GemStoreStackPanel.Children.Add(text);
+            }
         }
     }
 }

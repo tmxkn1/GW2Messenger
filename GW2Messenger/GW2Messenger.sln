@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2Messenger", "GW2Messenger\GW2Messenger.csproj", "{9C3222C8-95AE-4212-9403-E7827F290BC9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcDPSAutoUpdate", "ArcDPSAutoUpdate\ArcDPSAutoUpdate.csproj", "{EE696B40-2828-43B8-80B6-CAF2ED8CB133}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9C3222C8-95AE-4212-9403-E7827F290BC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C3222C8-95AE-4212-9403-E7827F290BC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C3222C8-95AE-4212-9403-E7827F290BC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE696B40-2828-43B8-80B6-CAF2ED8CB133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE696B40-2828-43B8-80B6-CAF2ED8CB133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE696B40-2828-43B8-80B6-CAF2ED8CB133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE696B40-2828-43B8-80B6-CAF2ED8CB133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
